@@ -1,6 +1,7 @@
 import pygame
 import random
 import time
+import utils
 from cell import cell
 
 pygame.init()
@@ -10,6 +11,8 @@ clock = pygame.time.Clock()
 screen_size_pixels = 1000
 board_size = 10
 cell_size = (screen_size_pixels/board_size)
+start = None
+end = None
 
 print(cell_size)
 
@@ -20,8 +23,7 @@ cells = []
 for i in range(board_size):
     row = []
     for j in range(board_size):
-        wall = random.choice([True,False])
-        c = cell(j,i,cell_size,wall)
+        c = cell(j,i,cell_size)
         row.append(c)
     cells.append(row)
 
@@ -34,4 +36,36 @@ while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             exit()
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_KP_ENTER:
+                if start and end:
+                    print(utils.distance(start,end))
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            if event.button == 1:
+                c = utils.get_mouse_cell(cells,cell_size)
+                if c == start:
+                    start = None
+                if c == end:
+                    end = None
+                if c.block_type == 0:
+                    c.block_type = 1
+                else:
+                    c.block_type = 0
+            elif event.button == 3:
+                keys = pygame.key.get_pressed()
+                if keys[pygame.K_LSHIFT]:
+                    if end:
+                        end.block_type = 0
+                    end = utils.get_mouse_cell(cells,cell_size)
+                    end.block_type = 3
+                    if end == start:
+                        start = None
+                else:
+                    if start:
+                        start.block_type = 0
+                    start = utils.get_mouse_cell(cells,cell_size)
+                    start.block_type = 2
+                    if start == end:
+                        end = None
+
     pygame.display.flip()  

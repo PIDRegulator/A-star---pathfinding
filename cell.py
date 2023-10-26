@@ -1,7 +1,7 @@
 import pygame
 
 class cell:
-    def __init__(self,x,y,size,wall=False):
+    def __init__(self,x,y,size,block_type=0):
         self.x = x
         self.y = y
         self.size = size
@@ -10,12 +10,12 @@ class cell:
         self.h_cost = 0 # Position to end
         self.f_cost = 0 # g_cost + h_cost
 
-        self.wall = wall
+        self.block_type = block_type
+        self.colors = [(255,255,255),(0,0,0),(0,255,0),(255,0,0)]
 
-        if wall:
-            self.color = (0,0,0)
-        else:
-            self.color = (255,255,255)
-    
     def draw(self,screen):
-        pygame.draw.rect(screen,self.color,[self.x*self.size,self.y*self.size,self.size,self.size])
+        color = self.colors[self.block_type]
+        pygame.draw.rect(screen,color,[self.x*self.size,self.y*self.size,self.size,self.size])
+
+        
+    
