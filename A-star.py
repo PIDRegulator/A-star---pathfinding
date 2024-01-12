@@ -14,7 +14,8 @@ cell_size = (screen_size_pixels/board_size)
 start = None
 end = None
 
-print(cell_size)
+queue = []
+visited = set()
 
 screen_size = (screen_size_pixels, screen_size_pixels)
 screen = pygame.display.set_mode((screen_size[0],screen_size[1]))
@@ -39,8 +40,33 @@ while True:
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_KP_ENTER:
                 if start and end:
-                    print(utils.distance(start,end))
+                    path_exist = utils.astar(cells,start,end)
+                    if path_exist:
+                        print("Path found")
+                        utils.reconstruct_path(start,end)
+                    else:
+                        print("Path not found")
+
+            elif event.key == pygame.K_KP_0:
+                if len(queue) == 0:
+                    queue = [start]
+                    visited = set()
+                completed, queue, visited = utils.astar_step(cells,end,queue, set(), True)
+                if completed:
+                    for row in cells:
+                        for c in row:
+                            if c.block_type in [5,6]:
+                                c.block_type = 0
+                    utils.reconstruct_path(start,end)
+                    queue = [start]
+                    visited = set()
+            if event.key == pygame.K_KP_1:
+                utils.clear(cells, True)
+                start = None
+                end = None    
+            
         elif event.type == pygame.MOUSEBUTTONDOWN:
+            utils.clear(cells, False)
             if event.button == 1:
                 c = utils.get_mouse_cell(cells,cell_size)
                 if c == start:
