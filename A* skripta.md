@@ -88,7 +88,7 @@ Představme si že máme čtvercovou síť ve které se můžeme hýbat jen do �
 ### 8. A znovu
 - Algoritmus pokračuje jako dosud a objevuje nová políčka.
 
-![A*- step2](/home/jachym/Plocha/Škola/Programování a vývoj aplikací/A*/Vizualizace/Vizualizace-008.png)
+![A*- step2](/Vizualizace/Vizualizace-008.png)
 
 ### 9. A znovu
 - Algoritmus pokračuje jako dosud a objevuje nová políčka.
