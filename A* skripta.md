@@ -3,12 +3,12 @@
 --- 
 
 ## Obsah
-1. 
-2. 
-3. 
-4. 
-5. 
-6. 
+1. Co to je algoritmus?
+2. Co to vlastně A* je?
+3. Kde se A* používá?
+4. Jak A* funguje?
+5. Porovnání s jinými pathfinding algoritmy.
+6. Historie.
 
 
 ## Co to je algoritmus?
@@ -127,15 +127,24 @@ Představme si že máme čtvercovou síť ve které se můžeme hýbat jen do �
 - Hledání trvá dlouho, protože prohledá kruhy v celém rádiusu, než se dostane k cíli.
 
 ### Djikstra
+- Funguje podobně jako BFS, ale může fungovat pokud se nepohybujeme v prostředí kde jsou všechny vzdálenosti stejné.
 
 #### Výhody
+- Funguje i pokud nejsou všechny vzdálenosti stejné.
+
 
 #### Nevýhody
+- Nebude fungovat pokud budou mít vzádlenosti i mínusové hodnoty.
+- Nalezení cesty trvá déle.
 
 ### A*
 
 #### Výhody
+- Rychlé nalezení nejkratší cesty.
+- Pokud jsou splněny podmínky najde nejkratší cestu.
 
 #### Nevýhody
+- Náročnější na paměť.
 
 ## Historie 
+Poprvé byl algoritmus představen v roce 1968. Již od roku 1964 se snažili vylepšit Djikstrův algoritmus. Přes tuto dobu se algoritmus vyvíjel ale nebyly schopni dokázat, že je opravdu optimální.
